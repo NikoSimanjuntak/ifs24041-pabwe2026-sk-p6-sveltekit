@@ -23,9 +23,3 @@
       <main class="min-w-0 flex-1 p-4 sm:p-8">{@render children()}</main>
     </div>
   </div>
-{:else}
-  <main class="grid min-h-screen place-items-center text-ink-500">
-    <h1 class="sr-only">Delcom Courses</h1>
-    <p role="status">Memuat sesi...</p>
-  </main>
-{/if}

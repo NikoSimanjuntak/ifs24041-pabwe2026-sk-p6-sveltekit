@@ -21,6 +21,7 @@
     <label class="block text-sm font-medium">
       Email
       <input
+        id="login-email-input"
         type="email"
         required
         autocomplete="email"
@@ -31,6 +32,7 @@
     <label class="block text-sm font-medium">
       Kata sandi
       <input
+        id="login-password-input"
         type="password"
         required
         autocomplete="current-password"
@@ -39,6 +41,7 @@
       />
     </label>
     <button
+      id="login-submit-button"
       type="submit"
       disabled={$authStore.loading}
       class="flex w-full items-center justify-center gap-2 rounded-xl bg-ink-800 px-4 py-2.5 font-semibold text-white hover:bg-ink-700 disabled:opacity-60"

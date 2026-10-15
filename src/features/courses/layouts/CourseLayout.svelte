@@ -24,8 +24,8 @@
     </div>
   </div>
 {:else}
-  <div class="grid min-h-screen place-items-center text-ink-500">
+  <main class="grid min-h-screen place-items-center text-ink-500">
     <h1 class="sr-only">Delcom Courses</h1>
     <p role="status">Memuat sesi...</p>
-  </div>
+  </main>
 {/if}

@@ -19,6 +19,8 @@ describe("CourseLayout", () => {
   it("tanpa token: menampilkan status memuat dan mengalihkan ke login", async () => {
     render(CourseLayout, { props: { children } });
     expect(screen.getByRole("status")).toHaveTextContent("Memuat sesi...");
+    expect(screen.getByRole("heading", { level: 1, name: "Delcom Courses" })).toBeInTheDocument();
+    expect(screen.getByRole("main")).toContainElement(screen.getByRole("status"));
     expect(screen.queryByText("Konten halaman")).toBeNull();
     await waitFor(() => expect(goto).toHaveBeenCalledWith("/auth/login"));
   });

@@ -24,8 +24,12 @@
 
     <div class="flex items-center gap-3">
       {#if profile}
-        <a href="/profile" class="flex items-center gap-2.5 rounded-full py-1 pr-3 pl-1 hover:bg-ink-50">
-          <Avatar name={profile.name} src={profile.photo} size="sm" />
+        <a
+          href="/profile"
+          aria-label={`Profil ${profile.name}`}
+          class="flex items-center gap-2.5 rounded-full py-1 pr-3 pl-1 hover:bg-ink-50"
+        >
+          <Avatar name={profile.name} src={profile.photo} size="sm" decorative />
           <span class="hidden text-sm font-medium sm:inline">{profile.name}</span>
         </a>
       {/if}

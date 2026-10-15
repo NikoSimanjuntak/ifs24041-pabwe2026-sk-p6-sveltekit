@@ -46,6 +46,7 @@
   </a>
 
   {#if !content || !course}
+    <h1 class="sr-only">Materi kursus</h1>
     {#if $coursesStore.error}
       <p class="mt-6 rounded-xl bg-red-50 p-4 text-red-800" role="alert">{$coursesStore.error}</p>
     {:else}

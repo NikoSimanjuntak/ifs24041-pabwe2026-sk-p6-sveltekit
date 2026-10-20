@@ -15,7 +15,10 @@ describe("Navbar", () => {
     const onmenu = vi.fn();
     render(Navbar, { props: { onmenu } });
 
-    expect(screen.getByRole("link", { name: /Abdullah Ubaid/ })).toHaveAttribute("href", "/profile");
+    const profileLink = screen.getByRole("link", { name: "Profil Abdullah Ubaid" });
+    expect(profileLink).toHaveAttribute("href", "/profile");
+    // Avatar dekoratif: tidak mengulang nama pengguna yang sudah menjadi teks tautan.
+    expect(profileLink.querySelector("img")).toHaveAttribute("alt", "");
     expect(screen.getByRole("link", { name: "Beranda Delcom Courses" })).toHaveAttribute("href", "/");
 
     await fireEvent.click(screen.getByRole("button", { name: "Buka menu" }));
@@ -24,6 +27,14 @@ describe("Navbar", () => {
     await fireEvent.click(screen.getByRole("button", { name: /Keluar/ }));
     await waitFor(() => expect(get(authStore).token).toBeNull());
     expect(calls[0].path).toBe("/auth/logout");
+  });
+
+  it("pengguna tanpa foto: menampilkan inisial yang disembunyikan dari pembaca layar", () => {
+    signIn(user({ name: "Niko Simanjuntak", photo: null }));
+    render(Navbar, { props: { onmenu: vi.fn() } });
+    const link = screen.getByRole("link", { name: "Profil Niko Simanjuntak" });
+    expect(link.querySelector("[aria-hidden='true']")).toHaveTextContent("NS");
+    expect(link.querySelector("img")).toBeNull();
   });
 
   it("tidak menampilkan tautan profil bila profil belum ada", () => {
@@ -74,7 +85,9 @@ describe("Sidebar", () => {
     render(Sidebar, { props: { onnavigate: vi.fn() } });
     expect(screen.getByRole("link", { name: "Semua Kursus" })).toHaveAttribute("aria-current", "page");
     setPage("/users");
-    await waitFor(() => expect(screen.getByRole("link", { name: "Pengguna" })).toHaveAttribute("aria-current", "page"));
+    await waitFor(() =>
+      expect(screen.getByRole("link", { name: "Pengguna" })).toHaveAttribute("aria-current", "page"),
+    );
     expect(screen.getByRole("link", { name: "Semua Kursus" })).not.toHaveAttribute("aria-current");
   });
 });
